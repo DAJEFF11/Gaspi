@@ -46,10 +46,11 @@ jobs:
           $vswhere = "${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe"
           $vsRoot = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
           if (-not $vsRoot) { throw 'Visual Studio installation not found' }
-          $redist = Get-ChildItem -LiteralPath "$vsRoot/VC/Redist/MSVC" -Directory | Sort-Object Name -Descending | Select-Object -First 1
-          $crt = Get-ChildItem -LiteralPath "$($redist.FullName)/x64" -Directory -Filter 'Microsoft.VC*.CRT' | Select-Object -First 1
-          if (-not $crt) { throw 'Visual C++ runtime not found' }
-          Get-ChildItem -LiteralPath $crt.FullName -Filter '*.dll' | Copy-Item -Destination build/windows/x64/runner/Release
+          $runtime = Get-ChildItem -LiteralPath "$vsRoot/VC/Redist/MSVC" -Recurse -Filter 'msvcp140.dll' |
+            Where-Object { $_.Directory.Name -like 'Microsoft.VC*.CRT' -and $_.FullName -match '[\\/]x64[\\/]' -and $_.FullName -notmatch 'onecore' } |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $runtime) { throw 'Visual C++ x64 runtime not found' }
+          Get-ChildItem -LiteralPath $runtime.DirectoryName -Filter '*.dll' | Copy-Item -Destination build/windows/x64/runner/Release
       - name: Package portable Windows app
         shell: pwsh
         run: |
@@ -130,3 +131,4 @@ jobs:
           else
             gh release create "$TAG" dist/* --target "$GITHUB_SHA" --title "Gaspi $TAG · Windows y Android" --notes-file docs/RELEASE.md --prerelease
           fi
+
