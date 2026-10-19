@@ -19,9 +19,17 @@ Una biblioteca limpia en blanco o negro mate profundo. Un pequeño fantasma que 
 
 ## Descargas
 
-**Primera versión en preparación.** Los enlaces directos del instalador `.exe` y del APK se habilitarán después de verificar la primera compilación. Puedes seguirla en [GitHub Actions](https://github.com/DAJEFF11/Gaspi/actions/workflows/release.yml).
+**Gaspi 0.1.0 · primera versión de prueba.** Compilada con éxito para Windows y Android en GitHub Actions.
 
-[Ver todas las versiones](https://github.com/DAJEFF11/Gaspi/releases)
+| Plataforma | Descarga directa |
+| --- | --- |
+| Windows x64 · instalador | [**Descargar Gaspi (.exe)**](https://github.com/DAJEFF11/Gaspi/releases/download/v0.1.0/Gaspi-Setup-windows-x64.exe) |
+| Android · instalación manual | [**Descargar Gaspi (.apk)**](https://github.com/DAJEFF11/Gaspi/releases/download/v0.1.0/Gaspi-Android.apk) |
+| Windows x64 · versión portátil | [Descargar ZIP portátil](https://github.com/DAJEFF11/Gaspi/releases/download/v0.1.0/Gaspi-Windows-portable.zip) |
+
+[Notas de la versión](https://github.com/DAJEFF11/Gaspi/releases/tag/v0.1.0) · [SHA-256 de las descargas](https://github.com/DAJEFF11/Gaspi/releases/download/v0.1.0/SHA256SUMS.txt) · [Todas las versiones](https://github.com/DAJEFF11/Gaspi/releases)
+
+El EXE instala Gaspi con sus DLL y datos. Para usar la versión portátil, extrae **todo** el ZIP y abre `gaspi.exe`. En Android, permite la instalación del APK desde el gestor de archivos que uses.
 
 ## Así se ve
 
@@ -107,10 +115,11 @@ Los binarios de GitHub se generan con el [workflow de compilación y Release](.g
 
 Esta es una **vista previa**. No incluye todavía servicio Android de reproducción en segundo plano, controles de pantalla bloqueada, ecualizador, sincronización entre dispositivos ni desplazamiento automático de letras.
 
-Se verificaron la interfaz en nueve vistas y tamaños, el análisis de Dart y seis comprobaciones de lógica. Las pruebas automatizadas no sustituyen probar audio, importación e instalación en dispositivos reales. El APK inicial usa firma de depuración para uso personal y el instalador Windows no tiene firma Authenticode.
+Las compilaciones nativas de Windows y Android pasaron en GitHub Actions, junto al análisis de Dart y la suite de tres pruebas en ambas plataformas. También se verificaron nueve vistas/tamaños y seis comprobaciones directas de lógica. Las pruebas automatizadas no sustituyen probar audio, importación e instalación en dispositivos reales. El APK inicial usa firma de depuración para uso personal y el instalador Windows no tiene firma Authenticode.
 
 REA se utilizó para inspeccionar estáticamente el instalador y el inventario de recursos de Spotify. Su análisis semántico quedó parcial por permisos. Gaspi utiliza código y logo propios y no incluye recursos de Spotify. [Informe de REA](analysis/REA-SPOTIFY.md).
 
 ---
 
 <div align="center">Un pequeño fantasma. Toda tu música.<br /><strong>Un proyecto de <a href="https://github.com/DAJEFF11">DAJEFF11</a>.</strong></div>
+

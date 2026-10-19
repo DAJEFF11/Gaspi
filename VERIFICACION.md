@@ -1,33 +1,33 @@
-# Verificación de Gaspi
+# Verificación de Gaspi 0.1.0
 
-19 de octubre de 2026. Flutter 3.44.3, Dart 3.12.2, Windows x64.
+19 de octubre de 2026. Flutter 3.44.3, Dart 3.12.2.
 
-## Ejecutado correctamente
+## Compilación y distribución nativa
 
-- Resolución y descarga de dependencias con Dart Pub; `pubspec.lock` incluido.
-- Análisis completo mediante el protocolo del servidor oficial de análisis Dart: finalizado, sin diagnósticos en `lib/`, `test/` ni `tool/`.
-- Compilación kernel del código de interfaz y su arnés de render mediante `frontend_server_aot`: resultado de compilación 0 errores.
-- Seis casos directos de lógica: tiempos LRC repetidos y ordenados con fracciones/offset; extracción de texto LRC; letras sin tiempos; tiempos negativos; persistencia de canción con metadatos y letra; metadatos dañados con alternativa al nombre de archivo y LRC lateral.
-- Render real con `flutter_tester`: **nueve capturas, cero errores de Flutter/layout**. Biblioteca móvil clara/oscura (390×844), biblioteca PC clara/oscura (1440×900), reproductor inmersivo PC (1440×900), reproductor móvil (390×844), biblioteca móvil compacta (320×640), biblioteca PC compacta (1024×640), reproductor móvil compacto (320×640).
-- Se revisaron visualmente las capturas principales. Se corrigieron las superficies Material de las listas y la adaptación de controles al móvil compacto.
-- Logo vectorial integrado y archivos PNG/GIF/SVG generados; iconos Windows y Android reemplazados.
-- REA ejecutado sobre el instalador y recursos de interfaz instalados; resultados y límites en `analysis/REA-SPOTIFY.md`.
+[GitHub Actions · ejecución exitosa](https://github.com/DAJEFF11/Gaspi/actions/runs/39312328052) sobre el commit `690dfbdf4cc5fe2e8b6751877a62c06e60836ba9`.
 
-Las capturas usan un reproductor simulado y canciones ficticias sin archivos de audio. La carátula del fantasma es la alternativa que muestra la app cuando un archivo no tiene imagen embebida. No se inyectan esos datos en la app normal.
+- Windows Server 2022: `flutter analyze` sin problemas, suite Flutter con tres pruebas aprobadas, seis comprobaciones directas, compilación release de `gaspi.exe`, empaquetado de DLL de Visual C++, ZIP portátil e instalador Inno Setup. Resultado: **éxito**.
+- Ubuntu 24.04/JDK 17: `flutter analyze`, suite Flutter y `flutter build apk --release`. Resultado: **éxito**.
+- Publicación de EXE, APK, ZIP y `SHA256SUMS.txt` en [Release v0.1.0](https://github.com/DAJEFF11/Gaspi/releases/tag/v0.1.0). Los cuatro activos están subidos y la versión es pública, marcada como vista previa.
 
-## No verificado / pendiente
+El primer intento de empaquetado de Windows encontró una disposición diferente de carpetas en Visual Studio. Se corrigió buscando el runtime x64 dentro de la instalación. La compilación corregida finalizó correctamente. No se omiten las DLL necesarias para entregar un EXE aislado.
 
-- Las compilaciones nativas de Windows y APK se intentaron y fallaron por acceso denegado al crear los canales para procesos hijos de Dart, antes de ejecutar Visual Studio o Java. No se produjo EXE ni APK final.
-- No se ejecutó la suite mediante el comando `flutter test`; se ejecutaron directamente los seis casos descritos y el render de interfaz. El script de compilación sí incluye `flutter test` para el entorno normal.
-- No se probó audio real, códecs en los dispositivos, acceso con el selector del sistema, recuperación del índice en condiciones reales, instalación ni cambio nativo de pantalla completa. La pantalla inmersiva sí se renderizó.
-- REA obtuvo inventario estático parcial del paquete de interfaz; el análisis semántico de JavaScript se interrumpió con EPERM. No se afirma una reconstrucción completa de Spotify.
+## Código e interfaz
 
-## Continuar la compilación
+- Dependencias resueltas y bloqueadas en `pubspec.lock`.
+- Análisis completo mediante el servidor oficial de análisis Dart en local, sin diagnósticos.
+- Compilación kernel de la interfaz y del arnés de render: cero errores.
+- Seis casos directos aprobados: tiempos LRC repetidos/fracciones/offset y orden; extracción de texto LRC; letras sin tiempos; tiempos negativos; persistencia de canciones; alternativa ante metadatos dañados con LRC lateral.
+- Render real con `flutter_tester`: **nueve capturas, cero errores de Flutter/layout**. Móvil claro/oscuro (390×844), PC claro/oscuro (1440×900), reproductor PC (1440×900), reproductor móvil (390×844), biblioteca móvil compacta (320×640), PC compacto (1024×640) y reproductor móvil compacto (320×640).
+- Se revisaron visualmente las capturas principales y se corrigieron las superficies Material de las listas y los controles en móvil compacto.
+- Logo propio PNG/GIF/SVG e iconos nativos Windows/Android incluidos.
+- REA ejecutado sobre el instalador y recursos públicos de la instalación de Spotify: inventario parcial, interpretación semántica interrumpida por permisos. [Informe](analysis/REA-SPOTIFY.md).
 
-Abre PowerShell en esta carpeta y ejecuta:
+Las capturas usan un reproductor simulado y canciones ficticias sin archivos de audio; esos datos no forman parte de la app normal. El fantasma es la carátula alternativa cuando un archivo no tiene imagen embebida.
 
-```powershell
-.\Build-Gaspi.ps1 -Target all
-```
+## Límites de estas comprobaciones
 
-El script se detiene en cualquier fallo de análisis, pruebas o compilación. Las salidas exitosas van a `releases/`. Su ejecución podría revelar requisitos o problemas adicionales que no llegaron a comprobarse aquí.
+La compilación y las pruebas automatizadas **no verifican** reproducción real de cada códec, selectores del sistema, instalación, batería, recuperación del índice ni cambio nativo de pantalla completa en un dispositivo real. La pantalla inmersiva sí se renderizó. La app se distribuye como primera vista previa.
+
+El entorno local restringido no podía crear los canales de procesos hijos de Dart y fallaba antes de lanzar Visual Studio/Java. Los binarios finales se generaron en GitHub Actions, donde las compilaciones sí concluyeron.
+
