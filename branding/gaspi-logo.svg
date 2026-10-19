@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="120" viewBox="0 0 360 120" role="img" aria-label="Gaspi">
+<style>@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@keyframes blink{0%,84%,90%,100%{transform:scaleY(1)}87%{transform:scaleY(.18)}}.ghost{animation:float 3.2s ease-in-out infinite}.eyes{transform-box:fill-box;transform-origin:center;animation:blink 3.2s infinite}@media(prefers-reduced-motion:reduce){.ghost,.eyes{animation:none}}</style>
+<ellipse cx="62" cy="108" rx="21" ry="2" fill="#111" opacity=".1"/>
+<g class="ghost" transform="translate(12 10)"><path d="M22 78V42C22 5 78 5 78 42V78Q77 84 71 79Q65 70 59 80Q54 87 48 79Q42 71 36 80Q29 88 22 78Z" fill="#111"/><g class="eyes" fill="#fff"><ellipse cx="40" cy="45" rx="3.25" ry="5"/><ellipse cx="60" cy="45" rx="3.25" ry="5"/></g><path d="M46 59Q50 63 54 59" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>
+<text x="124" y="78" font-family="Segoe UI,Arial,sans-serif" font-size="57" font-weight="600" letter-spacing="-2" fill="#111">Gaspi</text></svg>
